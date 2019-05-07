@@ -1,0 +1,326 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The CreateTimeSeries request.",
+            "properties": {
+                "timeSeries": {
+                    "description": "The new data to be added to a list of time series. Adds at most one data point to each of several time series. The new data point must be more recent than any other point in its time series. Each TimeSeries value must fully specify a unique time series by supplying all label values for the metric and the monitored resource.The maximum number of TimeSeries objects per Create request is 200.",
+                    "items": {
+                        "description": "A collection of data points that describes the time-varying values of a metric. A time series is identified by a combination of a fully-specified monitored resource and a fully-specified metric. This type is used for both listing and creating time series.",
+                        "properties": {
+                            "metadata": {
+                                "description": "Output only. The associated monitored resource metadata. When reading a a timeseries, this field will include metadata labels that are explicitly named in the reduction. When creating a timeseries, this field is ignored.",
+                                "properties": {
+                                    "systemLabels": {
+                                        "additionalProperties": {
+                                            "description": "Properties of the object."
+                                        },
+                                        "description": "Output only. Values for predefined system metadata labels. System labels are a kind of metadata extracted by Google, including \"machine_image\", \"vpc\", \"subnet_id\", \"security_group\", \"name\", etc. System label values can be only strings, Boolean values, or a list of strings. For example:\n{ \"name\": \"my-test-instance\",\n  \"security_group\": [\"a\", \"b\", \"c\"],\n  \"spot_instance\": false }\n",
+                                        "type": "object"
+                                    },
+                                    "userLabels": {
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        },
+                                        "description": "Output only. A map of user-defined metadata labels.",
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "metric": {
+                                "description": "The associated metric. A fully-specified metric used to identify the time series.",
+                                "properties": {
+                                    "labels": {
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        },
+                                        "description": "The set of label values that uniquely identify this metric. All labels listed in the MetricDescriptor must be assigned values.",
+                                        "type": "object"
+                                    },
+                                    "type": {
+                                        "description": "An existing metric type, see google.api.MetricDescriptor. For example, custom.googleapis.com/invoice/paid/amount.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "metricKind": {
+                                "description": "The metric kind of the time series. When listing time series, this metric kind might be different from the metric kind of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the metric kind of the associated metric. If the associated metric's descriptor must be auto-created, then this field specifies the metric kind of the new descriptor and must be either GAUGE (the default) or CUMULATIVE.",
+                                "enum": [
+                                    "METRIC_KIND_UNSPECIFIED",
+                                    "GAUGE",
+                                    "DELTA",
+                                    "CUMULATIVE"
+                                ],
+                                "type": "string"
+                            },
+                            "points": {
+                                "description": "The data points of this time series. When listing time series, points are returned in reverse time order.When creating a time series, this field must contain exactly one point and the point's type must be the same as the value type of the associated metric. If the associated metric's descriptor must be auto-created, then the value type of the descriptor is determined by the point's type, which must be BOOL, INT64, DOUBLE, or DISTRIBUTION.",
+                                "items": {
+                                    "description": "A single data point in a time series.",
+                                    "properties": {
+                                        "interval": {
+                                            "description": "The time interval to which the data point applies. For GAUGE metrics, only the end time of the interval is used. For DELTA metrics, the start and end time should specify a non-zero interval, with subsequent points specifying contiguous and non-overlapping intervals. For CUMULATIVE metrics, the start and end time should specify a non-zero interval, with subsequent points specifying the same start time and increasing end times, until an event resets the cumulative value to zero and sets a new start time for the following points.",
+                                            "properties": {
+                                                "endTime": {
+                                                    "description": "Required. The end of the time interval.",
+                                                    "format": "google-datetime",
+                                                    "type": "string"
+                                                },
+                                                "startTime": {
+                                                    "description": "Optional. The beginning of the time interval. The default value for the start time is the end time. The start time must not be later than the end time.",
+                                                    "format": "google-datetime",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "value": {
+                                            "description": "The value of the data point.",
+                                            "properties": {
+                                                "boolValue": {
+                                                    "description": "A Boolean value: true or false.",
+                                                    "type": "boolean"
+                                                },
+                                                "distributionValue": {
+                                                    "description": "A distribution value.",
+                                                    "properties": {
+                                                        "bucketCounts": {
+                                                            "description": "Required in the Stackdriver Monitoring API v3. The values for each bucket specified in bucket_options. The sum of the values in bucketCounts must equal the value in the count field of the Distribution object. The order of the bucket counts follows the numbering schemes described for the three bucket types. The underflow bucket has number 0; the finite buckets, if any, have numbers 1 through N-2; and the overflow bucket has number N-1. The size of bucket_counts must not be greater than N. If the size is less than N, then the remaining buckets are assigned values of zero.",
+                                                            "items": {
+                                                                "format": "int64",
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "bucketOptions": {
+                                                            "description": "Required in the Stackdriver Monitoring API v3. Defines the histogram bucket boundaries.",
+                                                            "properties": {
+                                                                "explicitBuckets": {
+                                                                    "description": "The explicit buckets.",
+                                                                    "properties": {
+                                                                        "bounds": {
+                                                                            "description": "The values must be monotonically increasing.",
+                                                                            "items": {
+                                                                                "format": "double",
+                                                                                "type": "number"
+                                                                            },
+                                                                            "type": "array"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "exponentialBuckets": {
+                                                                    "description": "The exponential buckets.",
+                                                                    "properties": {
+                                                                        "growthFactor": {
+                                                                            "description": "Must be greater than 1.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        },
+                                                                        "numFiniteBuckets": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "int32",
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "scale": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "linearBuckets": {
+                                                                    "description": "The linear bucket.",
+                                                                    "properties": {
+                                                                        "numFiniteBuckets": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "int32",
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "offset": {
+                                                                            "description": "Lower bound of the first bucket.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        },
+                                                                        "width": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "count": {
+                                                            "description": "The number of values in the population. Must be non-negative. This value must equal the sum of the values in bucket_counts if a histogram is provided.",
+                                                            "format": "int64",
+                                                            "type": "string"
+                                                        },
+                                                        "exemplars": {
+                                                            "description": "Must be in increasing order of value field.",
+                                                            "items": {
+                                                                "description": "Exemplars are example points that may be used to annotate aggregated distribution values. They are metadata that gives information about a particular value added to a Distribution bucket, such as a trace ID that was active when a value was added. They may contain further information, such as a example values and timestamps, origin, etc.",
+                                                                "properties": {
+                                                                    "attachments": {
+                                                                        "description": "Contextual information about the example value. Examples are:Trace: type.googleapis.com/google.monitoring.v3.SpanContextLiteral string: type.googleapis.com/google.protobuf.StringValueLabels dropped during aggregation:  type.googleapis.com/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.",
+                                                                        "items": {
+                                                                            "additionalProperties": {
+                                                                                "description": "Properties of the object. Contains field @type with type URL."
+                                                                            },
+                                                                            "type": "object"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "timestamp": {
+                                                                        "description": "The observation (sampling) time of the above value.",
+                                                                        "format": "google-datetime",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "description": "Value of the exemplar point. This value determines to which bucket the exemplar belongs.",
+                                                                        "format": "double",
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "mean": {
+                                                            "description": "The arithmetic mean of the values in the population. If count is zero then this field must be zero.",
+                                                            "format": "double",
+                                                            "type": "number"
+                                                        },
+                                                        "range": {
+                                                            "description": "If specified, contains the range of the population values. The field must not be present if the count is zero. This field is presently ignored by the Stackdriver Monitoring API v3.",
+                                                            "properties": {
+                                                                "max": {
+                                                                    "description": "The maximum of the population values.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                },
+                                                                "min": {
+                                                                    "description": "The minimum of the population values.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "sumOfSquaredDeviation": {
+                                                            "description": "The sum of squared deviations from the mean of the values in the population. For values x_i this is:\nSum[i=1..n]((x_i - mean)^2)\nKnuth, \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition describes Welford's method for accumulating this sum in one pass.If count is zero then this field must be zero.",
+                                                            "format": "double",
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "doubleValue": {
+                                                    "description": "A 64-bit double-precision floating-point number. Its magnitude is approximately &plusmn;10<sup>&plusmn;300</sup> and it has 16 significant digits of precision.",
+                                                    "format": "double",
+                                                    "type": "number"
+                                                },
+                                                "int64Value": {
+                                                    "description": "A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.",
+                                                    "format": "int64",
+                                                    "type": "string"
+                                                },
+                                                "stringValue": {
+                                                    "description": "A variable-length string value.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "resource": {
+                                "description": "The associated monitored resource. Custom metrics can use only certain monitored resource types in their time series data.",
+                                "properties": {
+                                    "labels": {
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        },
+                                        "description": "Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Compute Engine VM instances use the labels \"project_id\", \"instance_id\", and \"zone\".",
+                                        "type": "object"
+                                    },
+                                    "type": {
+                                        "description": "Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Compute Engine VM instance is gce_instance. For a list of types, see Monitoring resource types and Logging resource types.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "valueType": {
+                                "description": "The value type of the time series. When listing time series, this value type might be different from the value type of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the type of the data in the points field.",
+                                "enum": [
+                                    "VALUE_TYPE_UNSPECIFIED",
+                                    "BOOL",
+                                    "INT64",
+                                    "DOUBLE",
+                                    "STRING",
+                                    "DISTRIBUTION",
+                                    "MONEY"
+                                ],
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

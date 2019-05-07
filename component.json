@@ -1,0 +1,458 @@
+{
+    "title": "Stackdriver Monitoring",
+    "description": "Manages your Stackdriver Monitoring data and configurations. Most projects must be associated with a Stackdriver account, with a few exceptions as noted on the individual method pages.",
+    "docsUrl": "https://cloud.google.com/monitoring/api/",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/monitoring/v3/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://monitoring.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "Oauth2": {
+                "label": "Oauth 2.0 authentication",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "monitoring_uptimeCheckIps_list": {
+            "main": "./lib/actions/monitoring_uptimeCheckIps_list.js",
+            "title": "Returns the list of IPs that checkers run from",
+            "description": "Returns the list of IPs that checkers run from",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_uptimeCheckIps_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_groups_delete": {
+            "main": "./lib/actions/monitoring_projects_groups_delete.js",
+            "title": "Deletes an existing group.",
+            "description": "Deletes an existing group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_groups_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_groups_get": {
+            "main": "./lib/actions/monitoring_projects_groups_get.js",
+            "title": "Gets a single group.",
+            "description": "Gets a single group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_groups_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_uptimeCheckConfigs_patch": {
+            "main": "./lib/actions/monitoring_projects_uptimeCheckConfigs_patch.js",
+            "title": "Updates an uptime check configuration. You can either replace the entire configuration with a new one or replace only certain fields in the current configuration by specifying the fields to be updated via \"updateMask\". Returns the updated configuration.",
+            "description": "Updates an uptime check configuration. You can either replace the entire configuration with a new one or replace only certain fields in the current configuration by specifying the fields to be updated via \"updateMask\". Returns the updated configuration.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_uptimeCheckConfigs_patch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_groups_update": {
+            "main": "./lib/actions/monitoring_projects_groups_update.js",
+            "title": "Updates an existing group. You can change any group attributes except name.",
+            "description": "Updates an existing group. You can change any group attributes except name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_groups_update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_alertPolicies_list": {
+            "main": "./lib/actions/monitoring_projects_alertPolicies_list.js",
+            "title": "Lists the existing alerting policies for the project.",
+            "description": "Lists the existing alerting policies for the project.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_alertPolicies_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_alertPolicies_create": {
+            "main": "./lib/actions/monitoring_projects_alertPolicies_create.js",
+            "title": "Creates a new alerting policy.",
+            "description": "Creates a new alerting policy.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_alertPolicies_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_collectdTimeSeries_create": {
+            "main": "./lib/actions/monitoring_projects_collectdTimeSeries_create.js",
+            "title": "Stackdriver Monitoring Agent only: Creates a new time series.<aside class=\"caution\">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>",
+            "description": "Stackdriver Monitoring Agent only: Creates a new time series.<aside class=\"caution\">This method is only for use by the Stackdriver Monitoring Agent. Use projects.timeSeries.create instead.</aside>",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_collectdTimeSeries_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_groups_list": {
+            "main": "./lib/actions/monitoring_projects_groups_list.js",
+            "title": "Lists the existing groups.",
+            "description": "Lists the existing groups.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_groups_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_groups_create": {
+            "main": "./lib/actions/monitoring_projects_groups_create.js",
+            "title": "Creates a new group.",
+            "description": "Creates a new group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_groups_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_groups_members_list": {
+            "main": "./lib/actions/monitoring_projects_groups_members_list.js",
+            "title": "Lists the monitored resources that are members of a group.",
+            "description": "Lists the monitored resources that are members of a group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_groups_members_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_metricDescriptors_list": {
+            "main": "./lib/actions/monitoring_projects_metricDescriptors_list.js",
+            "title": "Lists metric descriptors that match a filter. This method does not require a Stackdriver account.",
+            "description": "Lists metric descriptors that match a filter. This method does not require a Stackdriver account.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_metricDescriptors_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_metricDescriptors_create": {
+            "main": "./lib/actions/monitoring_projects_metricDescriptors_create.js",
+            "title": "Creates a new metric descriptor. User-created metric descriptors define custom metrics.",
+            "description": "Creates a new metric descriptor. User-created metric descriptors define custom metrics.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_metricDescriptors_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_monitoredResourceDescriptors_list": {
+            "main": "./lib/actions/monitoring_projects_monitoredResourceDescriptors_list.js",
+            "title": "Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.",
+            "description": "Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_monitoredResourceDescriptors_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_notificationChannelDescriptors_list": {
+            "main": "./lib/actions/monitoring_projects_notificationChannelDescriptors_list.js",
+            "title": "Lists the descriptors for supported channel types. The use of descriptors makes it possible for new channel types to be dynamically added.",
+            "description": "Lists the descriptors for supported channel types. The use of descriptors makes it possible for new channel types to be dynamically added.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_notificationChannelDescriptors_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_notificationChannels_list": {
+            "main": "./lib/actions/monitoring_projects_notificationChannels_list.js",
+            "title": "Lists the notification channels that have been created for the project.",
+            "description": "Lists the notification channels that have been created for the project.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_notificationChannels_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_notificationChannels_create": {
+            "main": "./lib/actions/monitoring_projects_notificationChannels_create.js",
+            "title": "Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.",
+            "description": "Creates a new notification channel, representing a single notification endpoint such as an email address, SMS number, or PagerDuty service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_notificationChannels_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_timeSeries_list": {
+            "main": "./lib/actions/monitoring_projects_timeSeries_list.js",
+            "title": "Lists time series that match a filter. This method does not require a Stackdriver account.",
+            "description": "Lists time series that match a filter. This method does not require a Stackdriver account.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_timeSeries_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_timeSeries_create": {
+            "main": "./lib/actions/monitoring_projects_timeSeries_create.js",
+            "title": "Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.",
+            "description": "Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_timeSeries_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_notificationChannels_getVerificationCode": {
+            "main": "./lib/actions/monitoring_projects_notificationChannels_getVerificationCode.js",
+            "title": "Requests a verification code for an already verified channel that can then be used in a call to VerifyNotificationChannel() on a different channel with an equivalent identity in the same or in a different project. This makes it possible to copy a channel between projects without requiring manual reverification of the channel. If the channel is not in the verified state, this method will fail (in other words, this may only be used if the SendNotificationChannelVerificationCode and VerifyNotificationChannel paths have already been used to put the given channel into the verified state).There is no guarantee that the verification codes returned by this method will be of a similar structure or form as the ones that are delivered to the channel via SendNotificationChannelVerificationCode; while VerifyNotificationChannel() will recognize both the codes delivered via SendNotificationChannelVerificationCode() and returned from GetNotificationChannelVerificationCode(), it is typically the case that the verification codes delivered via SendNotificationChannelVerificationCode() will be shorter and also have a shorter expiration (e.g. codes such as \"G-123456\") whereas GetVerificationCode() will typically return a much longer, websafe base 64 encoded string that has a longer expiration time.",
+            "description": "Requests a verification code for an already verified channel that can then be used in a call to VerifyNotificationChannel() on a different channel with an equivalent identity in the same or in a different project. This makes it possible to copy a channel between projects without requiring manual reverification of the channel. If the channel is not in the verified state, this method will fail (in other words, this may only be used if the SendNotificationChannelVerificationCode and VerifyNotificationChannel paths have already been used to put the given channel into the verified state).There is no guarantee that the verification codes returned by this method will be of a similar structure or form as the ones that are delivered to the channel via SendNotificationChannelVerificationCode; while VerifyNotificationChannel() will recognize both the codes delivered via SendNotificationChannelVerificationCode() and returned from GetNotificationChannelVerificationCode(), it is typically the case that the verification codes delivered via SendNotificationChannelVerificationCode() will be shorter and also have a shorter expiration (e.g. codes such as \"G-123456\") whereas GetVerificationCode() will typically return a much longer, websafe base 64 encoded string that has a longer expiration time.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_notificationChannels_getVerificationCode.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_notificationChannels_sendVerificationCode": {
+            "main": "./lib/actions/monitoring_projects_notificationChannels_sendVerificationCode.js",
+            "title": "Causes a verification code to be delivered to the channel. The code can then be supplied in VerifyNotificationChannel to verify the channel.",
+            "description": "Causes a verification code to be delivered to the channel. The code can then be supplied in VerifyNotificationChannel to verify the channel.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_notificationChannels_sendVerificationCode.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_notificationChannels_verify": {
+            "main": "./lib/actions/monitoring_projects_notificationChannels_verify.js",
+            "title": "Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.",
+            "description": "Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_notificationChannels_verify.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_uptimeCheckConfigs_list": {
+            "main": "./lib/actions/monitoring_projects_uptimeCheckConfigs_list.js",
+            "title": "Lists the existing valid uptime check configurations for the project, leaving out any invalid configurations.",
+            "description": "Lists the existing valid uptime check configurations for the project, leaving out any invalid configurations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_uptimeCheckConfigs_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "monitoring_projects_uptimeCheckConfigs_create": {
+            "main": "./lib/actions/monitoring_projects_uptimeCheckConfigs_create.js",
+            "title": "Creates a new uptime check configuration.",
+            "description": "Creates a new uptime check configuration.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/monitoring_projects_uptimeCheckConfigs_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

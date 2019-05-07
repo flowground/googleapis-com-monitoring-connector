@@ -1,0 +1,460 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "access_token": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The CreateCollectdTimeSeries request.",
+            "properties": {
+                "collectdPayloads": {
+                    "description": "The collectd payloads representing the time series data. You must not include more than a single point for each time series, so no two payloads can have the same values for all of the fields plugin, plugin_instance, type, and type_instance.",
+                    "items": {
+                        "description": "A collection of data points sent from a collectd-based plugin. See the collectd documentation for more information.",
+                        "properties": {
+                            "endTime": {
+                                "description": "The end time of the interval.",
+                                "format": "google-datetime",
+                                "type": "string"
+                            },
+                            "metadata": {
+                                "additionalProperties": {
+                                    "description": "A single strongly-typed value.",
+                                    "properties": {
+                                        "boolValue": {
+                                            "description": "A Boolean value: true or false.",
+                                            "type": "boolean"
+                                        },
+                                        "distributionValue": {
+                                            "description": "A distribution value.",
+                                            "properties": {
+                                                "bucketCounts": {
+                                                    "description": "Required in the Stackdriver Monitoring API v3. The values for each bucket specified in bucket_options. The sum of the values in bucketCounts must equal the value in the count field of the Distribution object. The order of the bucket counts follows the numbering schemes described for the three bucket types. The underflow bucket has number 0; the finite buckets, if any, have numbers 1 through N-2; and the overflow bucket has number N-1. The size of bucket_counts must not be greater than N. If the size is less than N, then the remaining buckets are assigned values of zero.",
+                                                    "items": {
+                                                        "format": "int64",
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "bucketOptions": {
+                                                    "description": "Required in the Stackdriver Monitoring API v3. Defines the histogram bucket boundaries.",
+                                                    "properties": {
+                                                        "explicitBuckets": {
+                                                            "description": "The explicit buckets.",
+                                                            "properties": {
+                                                                "bounds": {
+                                                                    "description": "The values must be monotonically increasing.",
+                                                                    "items": {
+                                                                        "format": "double",
+                                                                        "type": "number"
+                                                                    },
+                                                                    "type": "array"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "exponentialBuckets": {
+                                                            "description": "The exponential buckets.",
+                                                            "properties": {
+                                                                "growthFactor": {
+                                                                    "description": "Must be greater than 1.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                },
+                                                                "numFiniteBuckets": {
+                                                                    "description": "Must be greater than 0.",
+                                                                    "format": "int32",
+                                                                    "type": "integer"
+                                                                },
+                                                                "scale": {
+                                                                    "description": "Must be greater than 0.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "linearBuckets": {
+                                                            "description": "The linear bucket.",
+                                                            "properties": {
+                                                                "numFiniteBuckets": {
+                                                                    "description": "Must be greater than 0.",
+                                                                    "format": "int32",
+                                                                    "type": "integer"
+                                                                },
+                                                                "offset": {
+                                                                    "description": "Lower bound of the first bucket.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                },
+                                                                "width": {
+                                                                    "description": "Must be greater than 0.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "count": {
+                                                    "description": "The number of values in the population. Must be non-negative. This value must equal the sum of the values in bucket_counts if a histogram is provided.",
+                                                    "format": "int64",
+                                                    "type": "string"
+                                                },
+                                                "exemplars": {
+                                                    "description": "Must be in increasing order of value field.",
+                                                    "items": {
+                                                        "description": "Exemplars are example points that may be used to annotate aggregated distribution values. They are metadata that gives information about a particular value added to a Distribution bucket, such as a trace ID that was active when a value was added. They may contain further information, such as a example values and timestamps, origin, etc.",
+                                                        "properties": {
+                                                            "attachments": {
+                                                                "description": "Contextual information about the example value. Examples are:Trace: type.googleapis.com/google.monitoring.v3.SpanContextLiteral string: type.googleapis.com/google.protobuf.StringValueLabels dropped during aggregation:  type.googleapis.com/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.",
+                                                                "items": {
+                                                                    "additionalProperties": {
+                                                                        "description": "Properties of the object. Contains field @type with type URL."
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "type": "array"
+                                                            },
+                                                            "timestamp": {
+                                                                "description": "The observation (sampling) time of the above value.",
+                                                                "format": "google-datetime",
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "description": "Value of the exemplar point. This value determines to which bucket the exemplar belongs.",
+                                                                "format": "double",
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "mean": {
+                                                    "description": "The arithmetic mean of the values in the population. If count is zero then this field must be zero.",
+                                                    "format": "double",
+                                                    "type": "number"
+                                                },
+                                                "range": {
+                                                    "description": "If specified, contains the range of the population values. The field must not be present if the count is zero. This field is presently ignored by the Stackdriver Monitoring API v3.",
+                                                    "properties": {
+                                                        "max": {
+                                                            "description": "The maximum of the population values.",
+                                                            "format": "double",
+                                                            "type": "number"
+                                                        },
+                                                        "min": {
+                                                            "description": "The minimum of the population values.",
+                                                            "format": "double",
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "sumOfSquaredDeviation": {
+                                                    "description": "The sum of squared deviations from the mean of the values in the population. For values x_i this is:\nSum[i=1..n]((x_i - mean)^2)\nKnuth, \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition describes Welford's method for accumulating this sum in one pass.If count is zero then this field must be zero.",
+                                                    "format": "double",
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "doubleValue": {
+                                            "description": "A 64-bit double-precision floating-point number. Its magnitude is approximately &plusmn;10<sup>&plusmn;300</sup> and it has 16 significant digits of precision.",
+                                            "format": "double",
+                                            "type": "number"
+                                        },
+                                        "int64Value": {
+                                            "description": "A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.",
+                                            "format": "int64",
+                                            "type": "string"
+                                        },
+                                        "stringValue": {
+                                            "description": "A variable-length string value.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "description": "The measurement metadata. Example: \"process_id\" -> 12345",
+                                "type": "object"
+                            },
+                            "plugin": {
+                                "description": "The name of the plugin. Example: \"disk\".",
+                                "type": "string"
+                            },
+                            "pluginInstance": {
+                                "description": "The instance name of the plugin Example: \"hdcl\".",
+                                "type": "string"
+                            },
+                            "startTime": {
+                                "description": "The start time of the interval.",
+                                "format": "google-datetime",
+                                "type": "string"
+                            },
+                            "type": {
+                                "description": "The measurement type. Example: \"memory\".",
+                                "type": "string"
+                            },
+                            "typeInstance": {
+                                "description": "The measurement type instance. Example: \"used\".",
+                                "type": "string"
+                            },
+                            "values": {
+                                "description": "The measured values during this time interval. Each value must have a different dataSourceName.",
+                                "items": {
+                                    "description": "A single data point from a collectd-based plugin.",
+                                    "properties": {
+                                        "dataSourceName": {
+                                            "description": "The data source for the collectd value. For example there are two data sources for network measurements: \"rx\" and \"tx\".",
+                                            "type": "string"
+                                        },
+                                        "dataSourceType": {
+                                            "description": "The type of measurement.",
+                                            "enum": [
+                                                "UNSPECIFIED_DATA_SOURCE_TYPE",
+                                                "GAUGE",
+                                                "COUNTER",
+                                                "DERIVE",
+                                                "ABSOLUTE"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "description": "The measurement value.",
+                                            "properties": {
+                                                "boolValue": {
+                                                    "description": "A Boolean value: true or false.",
+                                                    "type": "boolean"
+                                                },
+                                                "distributionValue": {
+                                                    "description": "A distribution value.",
+                                                    "properties": {
+                                                        "bucketCounts": {
+                                                            "description": "Required in the Stackdriver Monitoring API v3. The values for each bucket specified in bucket_options. The sum of the values in bucketCounts must equal the value in the count field of the Distribution object. The order of the bucket counts follows the numbering schemes described for the three bucket types. The underflow bucket has number 0; the finite buckets, if any, have numbers 1 through N-2; and the overflow bucket has number N-1. The size of bucket_counts must not be greater than N. If the size is less than N, then the remaining buckets are assigned values of zero.",
+                                                            "items": {
+                                                                "format": "int64",
+                                                                "type": "string"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "bucketOptions": {
+                                                            "description": "Required in the Stackdriver Monitoring API v3. Defines the histogram bucket boundaries.",
+                                                            "properties": {
+                                                                "explicitBuckets": {
+                                                                    "description": "The explicit buckets.",
+                                                                    "properties": {
+                                                                        "bounds": {
+                                                                            "description": "The values must be monotonically increasing.",
+                                                                            "items": {
+                                                                                "format": "double",
+                                                                                "type": "number"
+                                                                            },
+                                                                            "type": "array"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "exponentialBuckets": {
+                                                                    "description": "The exponential buckets.",
+                                                                    "properties": {
+                                                                        "growthFactor": {
+                                                                            "description": "Must be greater than 1.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        },
+                                                                        "numFiniteBuckets": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "int32",
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "scale": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "linearBuckets": {
+                                                                    "description": "The linear bucket.",
+                                                                    "properties": {
+                                                                        "numFiniteBuckets": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "int32",
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "offset": {
+                                                                            "description": "Lower bound of the first bucket.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        },
+                                                                        "width": {
+                                                                            "description": "Must be greater than 0.",
+                                                                            "format": "double",
+                                                                            "type": "number"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "count": {
+                                                            "description": "The number of values in the population. Must be non-negative. This value must equal the sum of the values in bucket_counts if a histogram is provided.",
+                                                            "format": "int64",
+                                                            "type": "string"
+                                                        },
+                                                        "exemplars": {
+                                                            "description": "Must be in increasing order of value field.",
+                                                            "items": {
+                                                                "description": "Exemplars are example points that may be used to annotate aggregated distribution values. They are metadata that gives information about a particular value added to a Distribution bucket, such as a trace ID that was active when a value was added. They may contain further information, such as a example values and timestamps, origin, etc.",
+                                                                "properties": {
+                                                                    "attachments": {
+                                                                        "description": "Contextual information about the example value. Examples are:Trace: type.googleapis.com/google.monitoring.v3.SpanContextLiteral string: type.googleapis.com/google.protobuf.StringValueLabels dropped during aggregation:  type.googleapis.com/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.",
+                                                                        "items": {
+                                                                            "additionalProperties": {
+                                                                                "description": "Properties of the object. Contains field @type with type URL."
+                                                                            },
+                                                                            "type": "object"
+                                                                        },
+                                                                        "type": "array"
+                                                                    },
+                                                                    "timestamp": {
+                                                                        "description": "The observation (sampling) time of the above value.",
+                                                                        "format": "google-datetime",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "description": "Value of the exemplar point. This value determines to which bucket the exemplar belongs.",
+                                                                        "format": "double",
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        },
+                                                        "mean": {
+                                                            "description": "The arithmetic mean of the values in the population. If count is zero then this field must be zero.",
+                                                            "format": "double",
+                                                            "type": "number"
+                                                        },
+                                                        "range": {
+                                                            "description": "If specified, contains the range of the population values. The field must not be present if the count is zero. This field is presently ignored by the Stackdriver Monitoring API v3.",
+                                                            "properties": {
+                                                                "max": {
+                                                                    "description": "The maximum of the population values.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                },
+                                                                "min": {
+                                                                    "description": "The minimum of the population values.",
+                                                                    "format": "double",
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "sumOfSquaredDeviation": {
+                                                            "description": "The sum of squared deviations from the mean of the values in the population. For values x_i this is:\nSum[i=1..n]((x_i - mean)^2)\nKnuth, \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition describes Welford's method for accumulating this sum in one pass.If count is zero then this field must be zero.",
+                                                            "format": "double",
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "doubleValue": {
+                                                    "description": "A 64-bit double-precision floating-point number. Its magnitude is approximately &plusmn;10<sup>&plusmn;300</sup> and it has 16 significant digits of precision.",
+                                                    "format": "double",
+                                                    "type": "number"
+                                                },
+                                                "int64Value": {
+                                                    "description": "A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.",
+                                                    "format": "int64",
+                                                    "type": "string"
+                                                },
+                                                "stringValue": {
+                                                    "description": "A variable-length string value.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "collectdVersion": {
+                    "description": "The version of collectd that collected the data. Example: \"5.3.0-192.el6\".",
+                    "type": "string"
+                },
+                "resource": {
+                    "description": "The monitored resource associated with the time series.",
+                    "properties": {
+                        "labels": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Required. Values for all of the labels listed in the associated monitored resource descriptor. For example, Compute Engine VM instances use the labels \"project_id\", \"instance_id\", and \"zone\".",
+                            "type": "object"
+                        },
+                        "type": {
+                            "description": "Required. The monitored resource type. This field must match the type field of a MonitoredResourceDescriptor object. For example, the type of a Compute Engine VM instance is gce_instance. For a list of types, see Monitoring resource types and Logging resource types.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
